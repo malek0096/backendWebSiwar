@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        h2 {
+            color: #005A82;
+        }
+        .details {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>✅ Confirmation de votre demande</h2>
+
+        <p>Bonjour,</p>
+        <p>Nous avons bien reçu votre demande et voici les détails :</p>
+
+        <div class="details">
+            <p><strong>📌 Type de demande :</strong> {{type}}</p>
+            <p><strong>📌 Sous-Type :</strong> {{subType}}</p>
+            <p><strong>📝 Détails :</strong></p>
+            <p>{{details}}</p>
+        </div>
+
+        <p>Notre équipe reviendra vers vous dès que possible.</p>
+
+        <div class="footer">
+            <p>Merci de votre confiance.</p>
+            <p><strong>Woods of the World</strong></p>
+        </div>
+    </div>
+
+</body>
+</html>

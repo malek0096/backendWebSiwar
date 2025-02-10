@@ -1,21 +1,57 @@
-// backend/models/client.js
+const db = require('../config/db');
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-
-const clientSchema = new Schema({
-  nom: { type: String, required: true },
-  prenom: { type: String, required: true },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    set: (value) => {
-      // Convert to lowercase and remove spaces
-      return value.toLowerCase().replace(/\s+/g, '');
-    }
+const Client = {
+  // Ajouter un client
+  create: async (data) => {
+    const { username, email, password } = data;
+    const sql = `
+      INSERT INTO client (username, email, password)
+      VALUES ( ?, ?, ?)
+    `;
+    const [result] = await db.execute(sql, [username, email, password]);
+    return result;
   },
-  password: { type: String, required: true },
-});
 
-module.exports = mongoose.model('Client', clientSchema);
+  // Trouver un client par email
+  findByEmail: async (email) => {
+    const sql = `
+      SELECT * FROM client WHERE email = ?
+    `;
+    const [rows] = await db.execute(sql, [email]);
+    return rows[0];
+  },
+
+  // Trouver un client par ID
+  findById: async (id) => {
+    const sql = `
+      SELECT * FROM client WHERE id = ?
+    `;
+    const [rows] = await db.execute(sql, [id]);
+    return rows[0];
+  },
+
+  // Mettre à jour un client
+  update: async (id, data) => {
+    const { username, email } = data;
+    const sql = `
+      UPDATE client
+      SET username, email = ?
+      WHERE id = ?
+    `;
+    const [result] = await db.execute(sql, [nom, prenom, email, id]);
+    return result.affectedRows > 0;
+  },
+
+  // Mettre à jour le mot de passe
+  updatePassword: async (id, password) => {
+    const sql = `
+      UPDATE client
+      SET password = ?
+      WHERE id = ?
+    `;
+    const [result] = await db.execute(sql, [password, id]);
+    return result.affectedRows > 0;
+  },
+};
+
+module.exports = Client;

@@ -1,13 +1,20 @@
-// backend/routes/clientRoutes.js
-
 const express = require('express');
 const router = express.Router();
-const clientController = require('../controller/clientController');
+const clientController = require('../controller/clientController'); // Correction du chemin si nécessaire
 
+// Route pour créer un nouveau client (signup)
 router.post('/signup', clientController.signup);
+
+// Route pour déconnexion (signout)
 router.post('/signout', clientController.signout);
-router.get('/info', clientController.getClientInfo);
-router.put('/edit', clientController.editClientInfo);
-router.put('/password', clientController.editPassword);
+
+// Route pour récupérer les informations d'un client (GET /info/:id)
+router.get('/info/:id', clientController.getClientInfo);
+
+// Route pour mettre à jour les informations d'un client (PUT /edit/:id)
+router.put('/edit/:id', clientController.editClientInfo);
+
+// Route pour mettre à jour le mot de passe d'un client (PUT /password/:id)
+router.put('/password/:id', clientController.editPassword);
 
 module.exports = router;
